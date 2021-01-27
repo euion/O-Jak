@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <p>
+                <input type="text" name="student_ID" placeholder="ID"/>
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="PW"/>
+            </p>
+            <p>
+                <input type="submit" value="로그인"/>
+            </p>
+            {{error}}
+        </form>
+        <a href="{% url 'signup' %}">회원가입</a> 
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <p>
+                <input type="text" name="name" placeholder="이름"/>
+            </p>
+            <p>
+                <input type="text" name="student_ID" placeholder="ID"/>
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="PW"/>
+            </p>
+            <p>
+                <input type="password" name="re_password" placeholder="RE_PW"/>
+            </p>
+            <p>
+                <input type="radio" id="male" name="smoke" value="male">
+                    <label for="male">흡연</label><br>
+                <input type="radio" id="female" name="smoke" value="female">
+                    <label for="female">비흡연</label><br>    
+            </p>
+            <p>
+                <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">남성</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">여성</label><br>    
+            </p>
+            <p>
+                <input type="radio" id="male" name="tendency" value="male">
+                    <label for="male">외향적</label><br>
+                <input type="radio" id="female" name="tendency" value="female">
+                    <label for="female">내향적</label><br>    
+            </p>
+            <p>
+                <input type="radio" id="male" name="lifetime" value="male">
+                    <label for="male">아침형</label><br>
+                <input type="radio" id="female" name="lifetime" value="female">
+                    <label for="female">저녁형</label><br>    
+            </p>
+            <p>
+                <input type="text" name="major" placeholder="전공"/>
+            </p>
+            <p>
+                <input type="number" name="age" placeholder="나이" min="1" max="100"/>
+            </p>
+            <p>
+                <input type="text" name="religion" placeholder="종교"/>
+            </p>
+            <p>
+                <input type="checkbox" name="labtop" value="1"/> 노트북
+            </p>
+            <p>
+                <input type="text" name="sleepinghabit" placeholder="잠버릇"/>
+            </p>
+            <p>
+                <input type="submit" value="회원가입"/>
+            </p>            
+            {{error}}
+        </form>
+    </body>
+</html>
