@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% block head %}
+
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* display: none; */
+            top: 100px;
+            width: 100%;
+        }
+
+        .pro_num {
+            margin-top: -10px;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            font-size: 10pt;
+        }
+
+        .signup,
+        .question,
+        #next_quest {
+            font-size: 18px;
+            color: rgb(96, 80, 64);
+            text-align: center;
+            width: 400px;
+            margin-top: 30px;
+        }
+
+        .signup {
+            font-size: 30pt;
+        }
+
+        .question {
+
+            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 18pt;
+            margin-top: 25px;
+            width: 220px;
+            height: 60px;
+            background-color: #f2e4c1;
+            color: rgb(96, 80, 64);
+            cursor: pointer;
+        }
+
+        .next_quest {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+            color: white;
+            font-size: 18pt;
+            border-radius: 10px;
+            background-color: rgb(239, 202, 107);
+            width: 300px;
+            height: 60px;
+            cursor: pointer;
+        }
+
+        .main {
+            display: none;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+{% endblock %}
+{% block header %}
+<span id="progress_value">1번째 질문</span><br>
+<ul class="pro_num">
+    <li>1</li>
+    <li>8</li>
+</ul>
+<progress value="0" max="100" id="jb"></progress>
+<script>
+
+</script>
+{% endblock %}
+{% block content %}
+<form id="myForm" method="POST" action="#">
+    {% csrf_token %}
+    <input type="hidden" name="gender"/>
+    <input type="hidden" name="smoke"/>
+    <input type="hidden" name="tendency"/>
+    <input type="hidden" name="lifetime"/>
+    <input type="hidden" name="religion"/>
+    <input type="hidden" name="labtop"/>
+    <input type="hidden" name="room"/>
+    <input type="hidden" name="sleepinghabit"/>
+    
+    {% for item in question_keylist %}
+    <main class="main">
+        <div class="signup">회원 가입</div>
+
+        <div class="question">{{item}}</div>
+        {% for answer_key in question_list|get_item:item%}
+        <div class="buttons" onclick="clickBtn(this)">{{ question_list|get_item:item|get_item:answer_key }}</div>
+
+        {% endfor %}
+
+        <div class="next_quest" onclick="moveBtn()">다음 질문</div>
+
+    </main>
+    {% endfor %}
+</form>
+<script>
+    let n = 0;
+    let test = document.getElementsByClassName('main')
+    test[n].style.display = 'flex';
+    var ele = document.getElementById('jb');
+    var tester
+    let input_list = ['gender','smoke', 'tendency', 'lifetime', 'religion', 'labtop', 'room', 'sleepinghabit']
+
+    function clickBtn(content){ 
+        tester = content.innerHTML;
+        $(content).css("background-color", "rgba(96, 80, 64, 0.5)");
+        $(".buttons").not($(content)).css("background-color", "#f2e4c1");
+    }
+
+    function moveBtn() {     
+        ele = document.getElementById('jb');
+
+        if(ele.value > 95){
+            document.getElementsByClassName('next_quest')[7].innerHTML = "회원 가입";
+        }
+        
+        if(tester==null || tester== ""){
+            alert("항목을 선택해주세요");
+            return false;
+        }
+        if (ele.value < 100) {
+            document.getElementById('jb').value += (100/7);
+            n += 1;
+            document.getElementById('progress_value').innerHTML = (n+1) + "번째 질문";
+        }
+        
+        test[n].style.display = 'flex';
+        test[n - 1].style.display = 'none';
+        $('input[name='+input_list[n - 1]+']').val(tester);
+        tester="";
+    }
+    $('.next_quest:last').css("background-color", "red");
+    $('.next_quest:last').click(function(){
+        $("#myForm").submit();
+    });
+</script>
+{% endblock %}

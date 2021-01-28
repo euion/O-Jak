@@ -1,0 +1,108 @@
+
+
+{% extends 'base.html' %}
+{% block head %}
+
+<head>
+    <style>
+        main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            top: 100px;
+            width: 100%;
+        }
+
+        .pro_num{
+            margin-top: -10px;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            font-size: 10pt;
+        }
+
+        .signup,
+        .question,
+        #next_quest {
+            font-size: 18px;
+            color: rgb(96, 80, 64);
+            text-align: center;
+            width: 400px;
+            margin-top: 30px;
+        }
+
+        .signup {
+            font-size: 30pt;
+        }
+
+        .question {
+            font-family: Arial, Helvetica, sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 18pt;
+            margin-top: 25px;
+            width: 220px;
+            height: 60px;
+            background-color: #f2e4c1;
+            color: rgb(96, 80, 64);
+        }
+
+        #next_quest {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+            color: white;
+            font-size: 18pt;
+            border-radius: 10px;
+            background-color: rgb(239, 202, 107);
+            width: 300px;
+            height: 60px;
+            cursor: pointer;
+        }
+        .question{
+            margin-top: 10vmin;
+        }
+    </style>
+
+</head>
+{% endblock %}
+{% block header %}
+<span id="progress_value">0번째 질문</span><br>
+    <ul class="pro_num">
+        <li>0</li>
+        <li>10</li>
+    </ul>
+<progress value="0" max="10" id="jb"></progress>
+<script>
+    let n = 0;
+    function moveBtn() {
+        var ele = document.getElementById('jb');
+
+        if (ele.value < 10) {
+            document.getElementById('jb').value += 1;
+            n += 1;
+            document.getElementById('progress_value').innerHTML = n + "번째 질문";
+        }
+    }
+</script>
+{% endblock %}
+{% block content %}
+<main>
+    <br>
+    <div class="question">당신은 외향적인가요 내향적인가요?</div>
+    <div class="buttons">외향적 성격</div>
+    <div class="buttons">내향적 성격</div>
+    <div id="next_quest" onclick="moveBtn()">다음 질문</div>
+</main>
+
+{% endblock %}

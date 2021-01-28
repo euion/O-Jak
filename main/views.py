@@ -8,6 +8,6 @@ def home(request):
     print(key)
     
     if key:
-        return render(request, 'main.html')
+        return render(request, 'home.html')
     
-    return render(request, 'main.html')
+    return render(request, 'home.html')

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navContents">
+        <div class="topLi"><a href = "{% url 'main:home' %}"><img src="{% static 'img/logo.png' %}" alt="오작명교_로고" id="ojakLogo" ></a></div>
+        <div class="service">
+            <p>명교생활관 룸메이트 매칭 서비스</p>
+        </div>
+    </nav> 
+    <div>
+        <div class="mainContents">
+            <div class="logo_img">
+                <div class="img_text"></div>
+                <img src="{% static 'img/house.png' %}">
+            </div>    
+        </div>
+        <div class="und_logo">
+            <h1>당신에게 딱 맞는 룸메이트가 선정되었습니다.</h1>
+        </div>
+    </div>
+    <main></main>
+    <div></div>
+    <div class="mainContents">
+        <a href="#"></a>
+            <div class="start_btn">
+                채팅하기
+            </div>
+        </a>
+    </div>    
+</body>
+</html>

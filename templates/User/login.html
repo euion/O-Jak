@@ -1,22 +1,56 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-    <head>
-        
-    </head>
-    <body>
-        <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <p>
-                <input type="text" name="student_ID" placeholder="ID"/>
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="PW"/>
-            </p>
-            <p>
-                <input type="submit" value="로그인"/>
-            </p>
-            {{error}}
-        </form>
-        <a href="{% url 'signup' %}">회원가입</a> 
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <title>오작명교</title>
+</head>
+<body>
+    <header>
+        <div class="headerBox">
+            <ul class="headerTop">
+                <li class="topLi"><a href = "{% url 'main:home' %}"><img src="{% static 'img/logo.png' %}" alt="오작명교_로고" id="ojakLogo" ></a></li>
+                <li class="topLi"><h1>일반 로그인</h1></li>
+                <li class="topLi"></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="mainLogin">
+            <div class="container">
+                <form method="post" action="{% url 'login:login' %}">
+                    <ul class="mainLiContainer">
+                        <li class="mainLi"></li>
+                        <li class="mainLi">
+                            {% csrf_token %}               
+                            <div class="form-group">
+                                <ul>
+                                    <li class="loginTxt"><label for="username" ><p>아이디</p></label></li>
+                                    <li><input type="text" class="inputForm" style="background-color:#f2e4c1; color: white" name="student_ID" /></li>    
+                                </ul>
+                                <ul>
+                                    <li class="loginTxt"><label for="password"  id="loginPw" ><p>비밀번호</p></label></li>
+                                    <li><input type="password"  class="inputForm" name="password" /></li>
+                                    <li class="loginTxt"><a href="#"  id="loginSrcId"><p>비밀번호 찾기</p></a> </li>
+                                </ul> 
+                            </div>   
+                            <ul class="loginBtnContainer">
+                                <li><button type="submit" class="inputForm" style="font-size: 30pt;background-color:#efca6b; color: white">로그인</button> </li>
+                                <li><br></li>
+                                <li><a href="{% url 'login:signup' %}"><button type="button" class="inputForm" style="font-size: 30pt; color: #60503f">회원가입</button></a></li>
+                            </ul>
+                        </li>
+                        <li class="mainLi"></li>
+                    </ul>          
+                </form>  
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
 </html>

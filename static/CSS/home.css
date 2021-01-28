@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(242, 228, 193);
+    font-family: 'Do Hyeon', sans-serif;
+}
+body{
+    padding: 20px;
+}
+li{
+    list-style: none;
+    text-decoration:none;
+}
+a{
+    text-decoration: none;
+    color:rgb(96, 80, 63)
+}
+.homeBody {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10%;
+}
+main {
+    width: 400px;
+}
+.error {
+    font-size: 4vmin;
+    margin-top: 20px;
+    color: rgb(96, 80, 63);
+}
+.log_sign {
+    display: flex;
+    font-size: 4vmin;
+    margin: 20px 20px;
+    right: 10px;
+    color: rgb(96, 80, 63);
+}
+.loginSort{
+    display: inline;
+    flex-direction: column;
+}
+.logo_img {
+    margin-top: 30%;
+}
+
+.logo_img>img {
+    width: 300px;
+}
+
+.img_text {
+    background-color: rgba(242, 228, 193, 0);
+    color: rgb(96, 80, 63);
+    font-size: 26px;
+    position: relative;
+}
+.navContents{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* div {
+    border: 1px solid black;
+} */
+.und_logo {
+    font-size: 26px;
+    color: rgb(151, 139, 126);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+.start_btn {
+    color: #60503f;
+    font-size: 40px;
+    display: flex;
+    width: 400px;
+    height: 80px;
+    border: 7px solid #60503f;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

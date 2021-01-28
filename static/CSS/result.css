@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(242, 228, 193);
+    font-family: 'Do Hyeon', sans-serif;
+    color: rgb(96,80,63);
+}
+body{
+    margin: 20px;
+}
+.mainContents {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+main {
+    width: 400px;
+}
+.logo_img {
+    margin-top: 40%;
+}
+.navContents{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.service{
+    font-size: 20px;
+}
+.logo_img>img {
+    width: 300px;
+}
+
+.img_text {
+    background-color: rgba(242, 228, 193, 0);
+    color: rgb(96,80,63);
+    font-size: 26px;
+    position: relative;
+}
+#ojakLogo{
+    height: 15vmin;
+    padding:10px;
+}
+
+/* div {
+    border: 1px solid black;
+} */
+.und_logo h1{
+    text-align: center;
+    font-size: 10vmin;
+}
+.start_btn {
+    margin-top: 8vmin;
+    color: #60503f;
+    font-size: 40px;
+    display: flex;
+    width: 400px;
+    height: 80px;
+    border: 7px solid #60503f;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

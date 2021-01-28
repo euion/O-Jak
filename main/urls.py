@@ -16,7 +16,9 @@ Including another URLconf
 from django.urls import path
 from main import views
 
+app_name = "main"
+
 urlpatterns = [
     #get index/
-    path('', views.home, name="home"),
+    path('home/', views.home, name="home"),
 ]

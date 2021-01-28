@@ -16,9 +16,13 @@ Including another URLconf
 from django.urls import path
 from user import views
 
+app_name = 'login'
+
 urlpatterns = [
     # get login/ -> token, redirect index/
     path('login/', views.login, name="login"),
     # get signup/, post signup/ -> redirect login/
-    path('signup/', views.signup, name="signup"),    
+    path('signup/', views.signup, name="signup"), 
+    path('signup_quest/', views.signup_question, name="signup_question"),   
+    path('logout/', views.logout, name="logout"),
 ]

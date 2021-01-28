@@ -1,65 +1,247 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
-        <form method="post" action="{% url 'signup' %}">
-            {% csrf_token %}
-            <p>
-                <input type="text" name="name" placeholder="이름"/>
-            </p>
-            <p>
-                <input type="text" name="student_ID" placeholder="ID"/>
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="PW"/>
-            </p>
-            <p>
-                <input type="password" name="re_password" placeholder="RE_PW"/>
-            </p>
-            <p>
-                <input type="radio" id="male" name="smoke" value="male">
-                    <label for="male">흡연</label><br>
-                <input type="radio" id="female" name="smoke" value="female">
-                    <label for="female">비흡연</label><br>    
-            </p>
-            <p>
-                <input type="radio" id="male" name="gender" value="male">
-                    <label for="male">남성</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">여성</label><br>    
-            </p>
-            <p>
-                <input type="radio" id="male" name="tendency" value="male">
-                    <label for="male">외향적</label><br>
-                <input type="radio" id="female" name="tendency" value="female">
-                    <label for="female">내향적</label><br>    
-            </p>
-            <p>
-                <input type="radio" id="male" name="lifetime" value="male">
-                    <label for="male">아침형</label><br>
-                <input type="radio" id="female" name="lifetime" value="female">
-                    <label for="female">저녁형</label><br>    
-            </p>
-            <p>
-                <input type="text" name="major" placeholder="전공"/>
-            </p>
-            <p>
-                <input type="number" name="age" placeholder="나이" min="1" max="100"/>
-            </p>
-            <p>
-                <input type="text" name="religion" placeholder="종교"/>
-            </p>
-            <p>
-                <input type="checkbox" name="labtop" value="1"/> 노트북
-            </p>
-            <p>
-                <input type="text" name="sleepinghabit" placeholder="잠버릇"/>
-            </p>
-            <p>
-                <input type="submit" value="회원가입"/>
-            </p>            
-            {{error}}
-        </form>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% block head %}
+
+<head>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <style>
+        main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            top: 100px;
+            width: 100%;
+        }
+
+        #name,
+        #id,
+        #pw,
+        #re_pw,
+        #major,
+        #age {
+            font-size: 18px;
+            color: rgb(96, 80, 64);
+            text-align: start;
+            width: 400px;
+            margin-top: 30px;
+            margin-left: 40px;
+        }
+
+        #name {
+            margin-top: 100px;
+        }
+
+        #pw_alert {
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(96, 80, 64);
+            margin-left: 45px;
+        }
+
+        main>form>input {
+            width: 400px;
+            height: 70px;
+            margin: 2px;
+            border-radius: 10px;
+            background-color: rgb(248, 241, 224);
+            border: none;
+            font-size: 20px;
+            outline: none;
+            padding: 10px 10px;
+            margin-left: 40px;
+        }
+
+        .acc_button {
+            width: 400px;
+            height: 70px;
+            border-radius: 10px;
+            background-color: rgb(239, 202, 107);
+            border: none;
+            font-size: 30px;
+            color: white;
+            outline: none;
+            margin-top: 40px;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 50px;
+        }
+
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px rgb(248, 241, 224) inset;
+            color: #60503f;
+        }
+
+        footer {
+            height: 30vmin;
+        }
+    </style>
+
+</head>
+{% endblock %}
+{% block header %}
+회원 가입
+{% endblock %}
+
+{% block content %}
+<main>
+    <!-- form 태그 추가필요, 모든 항목이 입력되었는지, 공백만 입력하여 제출했는지, 패스워드는 양식에 맞게 제대로 입력했는지 예외 처리해주는 함수 필요 -->
+    <form id="signup_form" method="POST" action="{% url 'login:signup' %}">
+        {% csrf_token %}
+        <div id="name">이름<br></div>
+        <input type="text" name="name" />
+
+        <div id="id">아이디(학번)<br></div>
+        <input type="number" maxlength="7" name="student_ID" oninput="numberMaxLength(this)" />
+
+        <div id="age">나이<br></div>
+        <input type="number" maxlength="2" name="age" oninput="numberMaxLength(this)" />
+
+        <div id="id">학번<br></div>
+        <input type="number" maxlength="2" name="student_Number" oninput="numberMaxLength(this)" />
+
+        <div id="major">학과<br></div>
+        <input type="text" name="major" />
+
+        <div id="pw">비밀번호<br></div>
+        <input type="password" name="password" />
+        <div id="pw_alert">
+            * 숫자, 영문, 특수문자를 사용하여 최소 8자리 이상 입력해주세요<br>
+            * []는 사용할 수 없습니다.
+
+        </div>
+        <div id="re_pw">비밀번호 확인<br></div>
+        <input type="password" name="re_password" /><br>
+        <button type="submit" class="acc_button" onclick="checkPassword($('input[name=password]').val(), $('input[name=re_password]').val())">나의 정보 등록하기</button>
+    </form>
+
+</main>
+<footer>
+
+</footer>
+
+<script>
+    //
+
+    // 모든 Input 항목의 값을 체크해주는 함수
+    function checkAll() {
+        if (!checkMail(form.mail.value)) {
+            return false;
+        } else if (!checkPassword(form.pass.value, form.pass2.value)) {
+            return false;
+        }
+        return true;
+    }
+
+    // 입력폼에 공백 확인 함수
+    function checkExistData(value, dataName) {
+        if (value == "") {
+            alert(dataName + " 입력해주세요");
+            return false;
+        }
+        return true;
+    }
+
+    // 패스워드가 8자 미만이면
+    function pass8() {
+        var password1 = pass.value;
+        if (password1 > 8) {
+            document.getElementById("pText2").innerHTML = " ";
+        }
+    }
+
+    // 패스워드와 패스워드확인의 값이 같은지 확인
+    function passValue() {
+        var password = pass.value;
+        var password1 = pass2.value;
+        if (password == password1) {
+            document.getElementById("pText3").innerHTML = "The passwords are matching";
+        }
+        else {
+            if (password != password1) {
+                document.getElementById("pText3").innerHTML = "The passwords don't match! Kindly check";
+            }
+        }
+    }
+
+    function checkPassword(pass, pass2){
+
+    var pw = pass;
+    var pw2 = pass2;
+    var checkNumber = pw.search(/[0-9]/g);
+    var checkEnglish = pw.search(/[a-z]/ig);
+    
+    if(pw != pw2){
+        alert('패스워드가 달라요.');
+        return false;
+    }
+    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(pw)){            
+        alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+        return false;
+    }else if(checkNumber <0 || checkEnglish <0){
+        alert("숫자와 영문자를 혼용하여야 합니다.");
+        return false;
+    }else if(/(\w)\1\1\1/.test(pw)){
+        alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+        return false;
+    }else {
+        console.log("통과");
+    }
+}
+
+    // 패스워드 확인 함수
+    function checkPassword1(pass, pass2) {
+        //비밀번호가 입력되었는지 확인하기
+        if (!checkExistData(pass, "비밀번호를"))
+            return false;
+        //비밀번호 확인이 입력되었는지 확인하기
+        if (!checkExistData(pass2, "비밀번호 확인을"))
+            return false;
+        var password1RegExp = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        //비밀번호 유효성 검사
+        if (false === password1RegExp.test(pass)) {
+            alert("비밀번호는 영문 소문자와 숫자 8~16자리로 입력해야합니다");
+            form.pass.value = "";
+            form.pass.focus();
+            return false;
+        }
+        //비밀번호와 비밀번호 확인이 맞지 않다면..
+        if (pass != pass2) {
+            alert("두 비밀번호가 맞지 않습니다.");
+            form.pass.value = "";
+            form.pass2.value = "";
+            form.pass2.focus();
+            return false;
+        }
+        return true; //확인이 완료되었을 때
+    }
+
+
+    function numberMaxLength(e) {
+        if (e.value.length > e.maxLength) {
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }
+    $(function () {       // 회원가입시 빈값체크하는 함수
+        $("button[type=submit]").click(function () {
+            var isRight = true;
+            $("#signup_form").find("input").each(function (index, item) {
+                // 아무값없이 띄어쓰기만 있을 때도 빈 값으로 체크되도록 trim() 함수 호출
+                if ($(this).val().trim() == '') {
+                    alert($(this).attr("name") + " 항목을 입력하세요.");
+                    isRight = false;
+                    return false;
+                }
+            });
+
+            if (!isRight) {
+                return;
+            }
+
+            $(this).prop("disabled", true);
+            $(this).prop("disabled", false);
+        });
+
+    });
+</script>
+{% endblock %}

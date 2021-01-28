@@ -16,10 +16,13 @@ Including another URLconf
 from django.urls import path
 from question import views
 
+app_name = "question"
+
 urlpatterns = [
     #get post question 준비된 질문 수 만큼 페이지 생길 수 있도록
     path('questionStart/', views.question_df, name="questionStart"),
     #get result
-    
+    #result html 결과 보기위해 임시로 path 설정하겠음
+    path("questionResult/",views.questionResult, name="questionResult"),
     #chat
 ]
