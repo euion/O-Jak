@@ -25,9 +25,13 @@ main {
     width: 400px;
 }
 .error {
+    display: flex;
     font-size: 4vmin;
     margin-top: 20px;
     color: rgb(96, 80, 63);
+}
+.error>p{
+    display: inline;
 }
 .log_sign {
     display: flex;
@@ -54,12 +58,13 @@ main {
     font-size: 26px;
     position: relative;
 }
+/*
 .navContents{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
-/* div {
+div {
     border: 1px solid black;
 } */
 .und_logo {
@@ -75,7 +80,7 @@ main {
     color: #60503f;
     font-size: 40px;
     display: flex;
-    width: 400px;
+    width: 40px;
     height: 80px;
     border: 7px solid #60503f;
     justify-content: center;

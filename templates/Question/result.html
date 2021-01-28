@@ -5,7 +5,142 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Do Hyeon', sans-serif;
+        color: rgb(96,80,63);
+    }
+    body{
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        margin:20px;
+    }
+    li{
+        list-style: none;
+    }
+    .mainContents {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .roomMateLiContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .roomMateLi{    
+        padding: 5px;
+        margin: 2px;
+        border-radius: 10px ;
+        background-color: #f2e4c1;  
+    }
+    .navContents{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .service{
+        font-size: 20px;
+    }
+    .logo_img>img {
+        width: 15vw;
+    }
+    .img_text {
+        background-color: rgba(242, 228, 193, 0);
+        color: rgb(96,80,63);
+        font-size: 26px;
+        position: relative;
+    }
+    #ojakLogo{
+        height: 15vmin;
+        padding:10px;
+    }
+
+    /* div {
+        border: 1px solid black;
+    } */
+    .und_logo h2{
+        text-align: center;
+        font-size: 7vmin;
+        margin-bottom: 5vmin;
+    }
+
+    .start_btn {
+        margin-top: 8vmin;
+        font-size: 20px;
+        color: aliceblue;
+        display: flex;
+        background-color:#fdb605;
+        border: none;
+        border-radius: 15px;
+        width: 200px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }    
+    .progressTag {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        display: block;
+        width: 100px;
+        height: 20px;
+        border-radius: 7px;
+        color: #35495e;
+    }
+    progress::-webkit-progress-bar {
+        background-color: #eee;
+        border-radius: 8px;
+    }
+    progress::-webkit-progress-value {
+        background-color: #fdb605;
+        border-radius: 8px;
+    }
+    progress::-moz-progress-bar {
+        background-color: #eee;
+        border-radius: 8px;
+    }    
+    .css-progressbar {
+        width: 80%; 
+        -moz-animation: css-progressbar 2s ease-out;
+        -webkit-animation: css-progressbar 2s ease-out;   
+          
+    }
+    @media screen and (min-width: 900px) {
+            .roomMateLi{    
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f2e4c1;  
+        }
+            .start_btn {
+            margin-top: 8vmin;
+            font-size: 40px;
+            color: aliceblue;
+            display: flex;
+            background-color:#fdb605;
+            border: none;
+            border-radius: 15px;
+            width: 400px;
+            height: 70px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            }
+            .progressTag {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: block;
+            width: 150px;
+            height: 20px;
+            border-radius: 7px;
+            color: #35495e;
+        }
+    }
+    </style>
     <title>Document</title>
 </head>
 <body>
@@ -14,7 +149,7 @@
         <div class="service">
             <p>명교생활관 룸메이트 매칭 서비스</p>
         </div>
-    </nav> 
+    </nav>
     <div>
         <div class="mainContents">
             <div class="logo_img">
@@ -23,17 +158,55 @@
             </div>    
         </div>
         <div class="und_logo">
-            <h1>당신에게 딱 맞는 룸메이트가 선정되었습니다.</h1>
+            <h2>당신에게 딱 맞는 룸메이트가 선정되었습니다.</h2>
         </div>
     </div>
-    <main></main>
-    <div></div>
+    <main>
+        <div class="roomMateLiContainer">
+            {% for data in data %}
+            <ul class="roomMateLi"> <!--기능구현해야함-->
+                <li>이름 : {{data.name}}</li>
+                <li>학과 : {{data.major}}</li>
+                <li>학번 : {{data.student_ID}}학번</li>
+                <li>
+                    <p>나의 응답과 일치정도</p>
+                    <div class="bar-container">
+                        <progress class="progressTag" value="0" max="100">
+                    </div>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </main>
     <div class="mainContents">
         <a href="#"></a>
             <div class="start_btn">
                 채팅하기
             </div>
         </a>
-    </div>    
+    </div>
+    <script>
+        function tag () {
+            let progress = document.getElementsByClassName('.progressTag')
+            let interval = 1
+            let updatesPerSecond = 1000 / 60
+            let end = progress.max * 0.8
+
+            function animator () {
+                progress.value = progress.value + interval
+                if ( progress.value + interval < end){
+                setTimeout(animator, updatesPerSecond);
+                } else { 
+                progress.value = end
+                }
+            }
+
+            setTimeout(() => {
+                animator()
+            }, updatesPerSecond)
+        }
+
+        tag()
+    </script>    
 </body>
 </html>

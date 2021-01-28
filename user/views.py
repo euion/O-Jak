@@ -120,11 +120,12 @@ def signup_question(request):
             #room ,test
             room = request.POST.get('room', None) # 잠버릇종류
             
-            print(room)
-            
             sleepinghabit = request.POST.get('sleepinghabit', None) # 잠버릇종류
             # answer.. '네', '아니오'
-            print(sleepinghabit)
+            if sleepinghabit == '네':
+                sleepinghabit = 1
+            elif sleepinghabit == '아니오':
+                sleepinghabit = 0
 
             #default 상황
             police = 0 # 신고 유무 1: 유, 0: 무
@@ -208,12 +209,10 @@ def signup(request):
         
         #return render(request, 'Question/signup_quest.html', res_data)
         return redirect('/user/signup_quest')
-        #return render(request, 'Question/signup_quest.html', res_data)
-        return redirect('/user/signup_quest')
-        #return render(request, 'Question/signup_quest.html', res_data)
-        return redirect('/user/signup_quest')
-        #return render(request, 'Question/signup_quest.html', res_data)
-        return redirect('/user/signup_quest')
     
     else:
         return render(request, 'User/signup.html')
+
+
+def mypage(request):
+    return render(request, 'User/mypage.html') 

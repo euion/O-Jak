@@ -112,7 +112,7 @@
         </div>
         <div id="re_pw">비밀번호 확인<br></div>
         <input type="password" name="re_password" /><br>
-        <button type="submit" class="acc_button" onclick="checkPassword($('input[name=password]').val(), $('input[name=re_password]').val())">나의 정보 등록하기</button>
+        <button class="acc_button" onclick="checkPassword($('input[name=password]').val(), $('input[name=re_password]').val())">나의 정보 등록하기</button>
     </form>
 
 </main>
@@ -186,6 +186,8 @@
         return false;
     }else {
         console.log("통과");
+
+        $('#signup_form').submit();
     }
 }
 

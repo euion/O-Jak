@@ -25,4 +25,6 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"), 
     path('signup_quest/', views.signup_question, name="signup_question"),   
     path('logout/', views.logout, name="logout"),
+    #mypage 임시 추가
+    path('mypage/', views.mypage, name="mypage"),
 ]

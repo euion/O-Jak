@@ -133,29 +133,31 @@
 
     function moveBtn() {     
         ele = document.getElementById('jb');
-
-        if(ele.value > 95){
-            document.getElementsByClassName('next_quest')[7].innerHTML = "회원 가입";
-        }
         
         if(tester==null || tester== ""){
             alert("항목을 선택해주세요");
             return false;
         }
-        if (ele.value < 100) {
-            document.getElementById('jb').value += (100/7);
-            n += 1;
-            document.getElementById('progress_value').innerHTML = (n+1) + "번째 질문";
-        }
         
-        test[n].style.display = 'flex';
+        document.getElementById('jb').value += (100/7);
+        n += 1;
+        if(n<8){
+            document.getElementById('progress_value').innerHTML = (n+1) + "번째 질문";
+            test[n].style.display = 'flex';
+        }
+
         test[n - 1].style.display = 'none';
+        
+
         $('input[name='+input_list[n - 1]+']').val(tester);
         tester="";
+
+        $('.next_quest:last').click(function(){
+            $("#myForm").submit();
+        });
     }
+
     $('.next_quest:last').css("background-color", "red");
-    $('.next_quest:last').click(function(){
-        $("#myForm").submit();
-    });
+    $('.next_quest:last').html("회원 가입");
 </script>
 {% endblock %}

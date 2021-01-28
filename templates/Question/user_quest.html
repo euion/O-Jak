@@ -96,7 +96,7 @@
     <input type="hidden" name="smoke">
     <input type="hidden" name="tendency">
     <input type="hidden" name="lifetime">
-    <input type="hidden" name="student_ID">
+    <input type="hidden" name="student_Number">
     <input type="hidden" name="major">
     <input type="hidden" name="age">
     <input type="hidden" name="religion">
@@ -124,7 +124,7 @@
     test[n].style.display = 'flex';
     var ele = document.getElementById('jb');
     var tester
-    let input_list = ['smoke', 'tendency', 'lifetime', 'student_ID', 'major', 'age', 'religion', 'labtop', 'room', 'sleepinghabit']
+    let input_list = ['smoke', 'tendency', 'lifetime', 'student_Number', 'major', 'age', 'religion', 'labtop', 'room', 'sleepinghabit']
 
     function clickBtn(content){ 
         tester = content.innerHTML;
@@ -133,21 +133,32 @@
     }
 
     function moveBtn() {
-        if (ele.value < 100) {
-            document.getElementById('jb').value += (100/9);
-            n += 1;
+        ele = document.getElementById('jb');
+        
+        if(tester==null || tester== ""){
+            alert("항목을 선택해주세요");
+            return false;
+        }
+        
+        document.getElementById('jb').value += (100/9);
+        n += 1;
+        if(n<10){
             document.getElementById('progress_value').innerHTML = (n+1) + "번째 질문";
+            test[n].style.display = 'flex';
         }
-        if(ele.value > 90){
-            document.getElementsByClassName('next_quest')[9].innerHTML = "결과 보기";
-        }
-        test[n].style.display = 'flex';
+
         test[n - 1].style.display = 'none';
-        $('input[name='+input_list[n]+']').val(tester);
+        
+
+        $('input[name='+input_list[n - 1]+']').val(tester);
+        tester="";
+
+        $('.next_quest:last').click(function(){
+            $("#myForm").submit();
+        });
     }
+
     $('.next_quest:last').css("background-color", "red");
-    $('.next_quest:last').click(function(){
-        $("#myForm").submit();
-    });
+    $('.next_quest:last').html("결과");
 </script>
 {% endblock %}
