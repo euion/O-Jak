@@ -51,7 +51,7 @@ def get_item(dictionary, key):
 
 
 def question_df(request):
-    if 'signup_name' in request.session and 'signup_student_ID' in request.session and 'signup_student_Number' in request.session and 'signup_password' in request.session and 'signup_major' in request.session and 'signup_age' in request.session:
+    if 'name' in request.session and 'user' in request.session:
         if request.method == "POST":
             user_pk = request.session.get('user')
             
