@@ -1,1 +1,1 @@
-web: gunicorn RoomMate_Match_Serve.wsgi --log-file -
+web: gunicorn RoomMate_Match_Serve.wsgi --log-file-
