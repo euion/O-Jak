@@ -23,6 +23,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('question/', include('question.urls')),
     path('main/', include('main.urls')),
+    path('chat/', include('chat.urls')),
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -266,7 +266,7 @@ def question_df(request):
                 'data_list': data_list,
                 'data_countlist': data_countlist
             }
-            
+            print(data_countlist)
             return render(request, 'Question/result.html', data)
         else:
             question_keylist = list(question_list.keys())
